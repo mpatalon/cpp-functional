@@ -1,0 +1,45 @@
+// For format details, see https://aka.ms/vscode-remote/devcontainer.json or this file's README at:
+// https://github.com/microsoft/vscode-dev-containers/tree/v0.128.0/containers/cpp
+{
+  "name": "gcc:latest",
+
+  "build": {
+    "dockerfile": "Dockerfile",
+    "args": {
+      "USERNAME": "${localEnv:DOCKER_USER}"
+    }
+  },
+
+  //
+  // NOTICE:
+  // '--hostname' and '--name' does not work and prevents from running the container
+  //
+  "runArgs": [
+    "--cap-add=SYS_PTRACE",
+    "--security-opt",
+    "seccomp=unconfined"
+  ],
+
+  "settings": {
+    "terminal.integrated.shell.linux": "/bin/bash"
+  },
+
+  "extensions": [
+    "ms-vscode.cpptools"
+  ],
+
+  //
+  // NOTICE:
+  // 'workspaceMount' plus 'workspaceFolder' does not work, workspace is not mounted
+  //
+
+  "containerUser": "${localEnv:DOCKER_USER}",
+
+  "mounts": [
+    "source=vsc-gcc-server-extensions,target=/home/${localEnv:DOCKER_USER}/.vscode-server/extensions,type=volume",
+    "source=vsc-gcc-insiders-extensions,target=/home/${localEnv:DOCKER_USER}/.vscode-server-insiders/extensions,type=volume",
+    "source=vsc-gcc-docker-volume,target=/mnt/docker,type=volume"
+  ],
+
+  "postCreateCommand": ""
+}
