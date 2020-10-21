@@ -1,14 +1,16 @@
 {
-  "name": "gcc:latest",
+  "name": "vsc-gcc:latest",
 
   "build": {
     "dockerfile": "Dockerfile",
     "args": {
-      "USERNAME": "${localEnv:DOCKER_USER}",
-      "HOME": "/home/${localEnv:DOCKER_USER}",
-      "DOCKER_VOLUME": "/home/${localEnv:DOCKER_USER}/volume",
+      "USERNAME": "developer",
+      "HOME": "/home/developer",
+      "DOCKER_VOLUME": "/home/developer/volume",
     }
   },
+
+  "containerUser": "developer",
 
   "runArgs": [
     "--name=vsc-gcc-latest",
@@ -26,11 +28,7 @@
     "ms-vscode.cpptools"
   ],
 
-  "containerUser": "${localEnv:DOCKER_USER}",
-
   "mounts": [
-    "source=vsc-gcc-latest-volume,target=/home/${localEnv:DOCKER_USER}/volume,type=volume"
-  ],
-
-  "postCreateCommand": ""
+    "source=vsc-gcc-latest-volume,target=/home/developer/volume,type=volume"
+  ]
 }
