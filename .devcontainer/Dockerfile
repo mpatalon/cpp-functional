@@ -2,9 +2,13 @@
 FROM gcc:latest
 
 ARG USERNAME
+ARG HOME
+ARG DOCKER_VOLUME
 
-ENV USERNAME=${USERNAME}
-ENV HOME /home/${USERNAME}
+ENV USERNAME ${USERNAME}
+ENV HOME ${HOME}
+ENV DOCKER_VOLUME ${DOCKER_VOLUME}
+
 ENV USER_UID 1000
 ENV USER_GID ${USER_UID}
 
@@ -38,20 +42,21 @@ RUN \
   \
   && usermod -aG sudo ${USERNAME} \
   && echo ${USERNAME} ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/${USERNAME} \
-  && chmod 0440 /etc/sudoers.d/${USERNAME} \
-  \
-  && mkdir -p \
-    ${HOME}/.vscode-server/extensions \
-    ${HOME}/.vscode-server-insiders/extensions \
-  && chown -R ${USERNAME}:${USERNAME} ${HOME}
+  && chmod 0440 /etc/sudoers.d/${USERNAME}
 
-ENV DOCKER_VOLUME /mnt/docker
+ENV DOCKER_VOLUME ${HOME}/volume
 ENV PROMPT_COMMAND 'history -a'
-ENV HISTFILE ${DOCKER_VOLUME}/.bash_history
 
-RUN mkdir ${DOCKER_VOLUME} \
-  && touch ${HISTFILE} \
-  && chown -R ${USERNAME}:${USERNAME} ${DOCKER_VOLUME}
+RUN \
+  mkdir -p \
+    ${DOCKER_VOLUME} \
+    ${DOCKER_VOLUME}/.vscode-server/extensions \
+    ${DOCKER_VOLUME}/.vscode-server-insiders/extensions \
+  && touch ${DOCKER_VOLUME}/.bash_history \
+  && ln -s ${DOCKER_VOLUME}/.bash_history ${HOME}/.bash_history \
+  && ln -s ${DOCKER_VOLUME}/.vscode-server ${HOME}/.vscode-server \
+  && ln -s ${DOCKER_VOLUME}/.vscode-server-insiders ${HOME}/.vscode-server-insiders \
+  && chown -R ${USERNAME}:${USERNAME} ${HOME}
 
 WORKDIR ${HOME}
 USER ${USERNAME}
