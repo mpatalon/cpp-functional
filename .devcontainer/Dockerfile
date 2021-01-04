@@ -18,6 +18,7 @@ RUN export DEBIAN_FRONTEND=noninteractive \
   && apt-get -y install \
     apt-utils \
     build-essential \
+    clang-format \
     cmake \
     cppcheck \
     curl \
