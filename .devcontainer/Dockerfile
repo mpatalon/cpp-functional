@@ -12,6 +12,8 @@ ENV DOCKER_VOLUME ${DOCKER_VOLUME}
 ENV USER_UID 1000
 ENV USER_GID ${USER_UID}
 
+ENV TZ=Europe/Warsaw
+
 RUN export DEBIAN_FRONTEND=noninteractive \
   && export APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE=DontWarn \
   && apt-get update \
