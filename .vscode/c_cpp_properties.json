@@ -1,0 +1,24 @@
+{
+  "configurations": [
+    {
+      "name": "Linux",
+      "defines": [],
+      "forcedInclude": [],
+      "configurationProvider": "ms-vscode.cmake-tools",
+      "compilerPath": "/usr/local/bin/c++",
+      "cppStandard": "c++20",
+      "includePath": [
+        "${default}",
+        "${workspaceFolder}/**"
+      ],
+      "intelliSenseMode": "gcc-x64",
+      "browse": {
+        "path": [
+          "${workspaceFolder}"
+        ],
+        "limitSymbolsToIncludedHeaders": true
+      }
+    }
+  ],
+  "version": 4
+}
