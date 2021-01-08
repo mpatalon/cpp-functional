@@ -1,1 +1,1 @@
-# cpp-functional
+# functional-cpp
