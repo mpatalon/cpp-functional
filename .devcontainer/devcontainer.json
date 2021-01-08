@@ -25,16 +25,12 @@
 
   "extensions": [
     "alefragnani.bookmarks",
-    "austin.code-gnu-global",
     "davidanson.vscode-markdownlint",
-    "github.vscode-pull-request-github",
-    "jeff-hykin.better-cpp-syntax",
     "ms-vscode.cmake-tools",
     "ms-vscode.cpptools",
     "ms-vscode.cpptools-themes",
     "timonwong.shellcheck",
-    "twxs.cmake",
-    "xaver.clang-format"
+    "twxs.cmake"
   ],
 
   "mounts": [
